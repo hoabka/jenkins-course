@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('task1') {
+            steps {
+                sh 'echo "Hello jenkins pipeline"'
+            }
+        }
+        stage('task2') {
+            steps {
+                sh 'echo "Hello task2"'
+            }
+        }
+    }
+}

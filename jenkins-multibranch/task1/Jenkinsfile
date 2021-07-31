@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    tools {nodejs "nodejs"}
+    stages {
+        stage('build') {
+            steps {
+                echo 'Build'
+                        sh 'npm install'
+            }
+        }
+        stage('test') {
+            steps {
+                echo 'Test'
+            }
+        }
+        stage('For feature-* branch') {
+            when {
+                branch 'feature-*'
+            }
+            steps {
+                echo "Feature branch"
+            }
+        }
+        stage('For MR-* branch') {
+            when {
+                branch 'MR-*'
+            }
+            steps {
+                echo "MR branch"
+            }
+        }
+    }
+}
