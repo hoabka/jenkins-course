@@ -109,5 +109,5 @@ $ ngrok http 8080
 
 ![Internet Access Jenkins Server](https://github.com/hoabka/jenkins-course/blob/master/jenkins-installation/images/ngrokJenkinsCompleted.JPG)
 
-### Completed Task #1
+### Task #1 Completed
 ## 3. Troubleshooting

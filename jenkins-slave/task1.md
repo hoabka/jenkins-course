@@ -73,4 +73,5 @@ $ ssh-keyscan -p2222 jenkins_slave_node_ip > /var/jenkins_home/.ssh/known_hosts
 
 ![Add Node](https://github.com/hoabka/jenkins-course/blob/master/jenkins-slave/images/slaveStatus.JPG)
 
+### Task #1 Completed
 ## 3. Trouble Shooting
