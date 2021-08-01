@@ -3,7 +3,7 @@ Trong task này, bạn được yêu cầu tạo 1 Jenkins Pipeline. Pipeline n�
       
 ## 1. Tạo Jenkins Pipeline  
 ### 1.1.  Tạo Docker credential  
-- Vào mục **Manage Jenkins** => **Manage Credentials** =>  Chọn domain **blobal** và chonj **Add Credentials**  
+- Vào mục **Manage Jenkins** => **Manage Credentials** =>  Chọn domain **global** và chọn **Add Credentials**  
 - Ở phần **Kind** chọn **Secret text**. Điền **Docker Registry** username vào phần **Secret**. Phần ID điền là **DOCKER_REGISTRY_USERNAME**.  
 - Làm tương tự cho password của Docker Registry với ID là **DOCKER_REGISTRY_PASSWORD** và **REGISTRY_NAME**  
   
