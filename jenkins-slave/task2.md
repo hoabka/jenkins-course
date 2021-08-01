@@ -1,6 +1,7 @@
 ![Overview](https://github.com/hoabka/jenkins-course/blob/master/jenkins-slave/images/overview.png)
 
-## Task #2 Trong task này, bạn được yêu cầu build một một nodejs webapp đơn giản.     
+## Task #2 
+- Trong task này, bạn được yêu cầu build một một nodejs webapp đơn giản.     
         
 ## 1. Cài đặt NodeJS plugin và npm 
 ### 1.1.  Cài đặt NodeJS plugin  
