@@ -1,19 +1,9 @@
 fockversion: '2'
 services:
-  jenkins:
-    image: jenkins/jenkins:lts
-    ports:
-      - "8080:8080"
-      - "50000:50000"
-    networks:
-      - jenkins
-    volumes:
-      - /var/jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
   postgres:
     image: postgres:9.6
     networks:
-      - jenkins
+      - sonar
     environment:
       POSTGRES_USER: sonar
       POSTGRES_PASSWORD: sonarpasswd
@@ -25,7 +15,7 @@ services:
       - "9000:9000"
       - "9092:9092"
     networks:
-      - jenkins
+      - sonar
     environment:
       SONARQUBE_JDBC_USERNAME: sonar
       SONARQUBE_JDBC_PASSWORD: sonarpasswd
@@ -34,4 +24,4 @@ services:
       - postgres
 
 networks:
-  jenkins:
+  sonar:
