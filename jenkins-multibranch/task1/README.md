@@ -75,7 +75,8 @@ $ cat ./id_rsa.pub
   
 ![Test Connection GitLab Server](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/testConnection.JPG)  
   
-## 2. Tạo Jenkins multibranch pipeline ### 2.1. Tạo Multibranch Pipeline
+## 2. Tạo Jenkins multibranch pipeline 
+### 2.1. Tạo Multibranch Pipeline
 - Fork [gitlab project](https://gitlab.com/hoabka/nodejs-demo.git) về repo gitlab cá nhân.
 
 ![Fork Repo](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/forkRepo.JPG)
