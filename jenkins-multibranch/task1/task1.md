@@ -1,5 +1,4 @@
-
- ![Overview Multibranch Pipeline](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/overview.JPG)  
+![Overview Multibranch Pipeline](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/overview.JPG)  
   
 ## Task #1  
 Trong task này, bạn được yêu cầu cấu hình **Webhook** trên **Gitlab** và Webhook này được trigger để chạy Jenkins Multibranch pipeline.    
@@ -11,7 +10,8 @@ Trong task này, bạn được yêu cầu cấu hình **Webhook** trên **Gitla
 | Tạo Jenkinsfile trong project nodejs-demo| N/A |  
   
   
-## 1. Cấu hình Webhook, Credentials ### 1.1.  Cài đặt Gitlab Branch Source plugin on Jenkins  
+## 1. Cấu hình Webhook, Credentials 
+### 1.1.  Cài đặt Gitlab Branch Source plugin on Jenkins  
 - Gitlab branch source plugin là plugin để quản lý Gitlab configuration trên Jenkins và cho phép thêm các Branch sources trên Gitlab vào Jenkins multibranch pipeline.  
 - Chọn mục **Manage Jenkins** => **Manage Plugins** => Chọn Tab **Available** => Tìm Plugin **Gitlab Branch Source** => Sau đó nhấn cài đặt (**Install Without Restart**)  
   
@@ -46,7 +46,8 @@ $ cat ./id_rsa.pub
   
 ### 1.4.  Cấu hình Credentials trên Jenkins  
 #### 1.4.1. Cấu hình Gitlab Personal Access Token  
-- Chọn mục **Manage Jenkins** => **Manage Credentials** => Chọn **(global)** => **Add Credentials** => Chọn Kind **Gitlab Personal Access Token**. Sau đó điền **Token** được lưu ở bước **1.2**. Điền ID và Description và click **OK**   
+- Chọn mục **Manage Jenkins** => **Manage Credentials** => Chọn **(global)** => **Add Credentials** => Chọn Kind **Gitlab Personal Access Token**. Sau đó điền **Token** được lưu ở bước **1.2**. Điền ID và Description và click **OK**
+
 ![Add Personal Access Token credentail](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/addPATtoJenkins.JPG)  
   
 #### 1.4.2. Cấu hình SSH Key  
@@ -54,15 +55,19 @@ $ cat ./id_rsa.pub
 - Phần Private key, copy nội dung của Private key **id_rsa** được gen ở bước **1.3** và paste vào phần **Private Key**.  
   
 ![Add SSH credentail](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/addSSHCredentialtoJenkins.JPG)  
+
 #### 1.4.3. Cấu hình Gitlab Server  
-- Chọn mục **Manage Jenkins** => **Configuration System** => Xuống phần **GitLab** => Chọn Add **GitLab Server** => **GitLab Server** - Các thông tin cần điền được mô tả dưới đây  
+- Chọn mục **Manage Jenkins** => **Configuration System** => Xuống phần **GitLab** => Chọn Add **GitLab Server** => **GitLab Server** 
+-  Các thông tin cần điền được mô tả dưới đây 
+
 | Trường  | Giá trị | Ghi chú |  
-|:-------------|:----------:|-----------:|
+|-|-|-|
 | Display Name | gitlab-server  | Tên hiển thị của GitLab Server |  
 | Server URL | https://gitlab.com/  | Đường dẫn URL của GitLab server |  
 | Credentials | gitlab-pat | Tên của Credentail tạo bởi Personal Access Token ở bước  **1.4.1** |  
 | Manage Web Hooks | Yes | Cho phép Jenkins Server quản lý Webhook của GitLab (Tạo mới) |  
-| Secret Token | bPO8wsetLJHnxkBlcVdg | Token này dùng để xác thực Webhook Payload và có thể Generate tùy ý |  
+| Secret Token | bPO8wsetLJHnxkBlcVdg | Token này dùng để xác thực Webhook Payload và có thể Generate tùy ý |
+| Root URL for hooks | https://53412af07ffd.ngrok.io | Để url của **ngrok** trỏ tới Jenkins Master |    
   
 ![Config GitLab Serverl](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/configGitlabServer.JPG)  
   
@@ -70,10 +75,14 @@ $ cat ./id_rsa.pub
   
 ![Test Connection GitLab Server](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/testConnection.JPG)  
   
-## 2. Tạo Jenkins multibranch pipeline ### 2.1. Tạo Multibranch Pipeline  
-- Chọn **New Item** => Chọn **Multibranch Pipeline** => Click **OK**  
+## 2. Tạo Jenkins multibranch pipeline ### 2.1. Tạo Multibranch Pipeline
+- Fork [gitlab project](https://gitlab.com/hoabka/nodejs-demo.git) về repo gitlab cá nhân.
+
+![Fork Repo](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/forkRepo.JPG)
+
+- Trên Jenkins server chọn **New Item** => Chọn **Multibranch Pipeline** => Click **OK**  
   
-![Test Connection GitLab Server](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/newItem.JPG)  
+![Create Multibranch Job](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/newItem.JPG)  
   
 - Mục **Branch Sources** => chọn **Add source** => chọn **Gitlab project**  
 - Mục **Checkout Credentials** chọn Credential để Checkout code ở bước **1.4.2**  
@@ -116,8 +125,8 @@ $ git push orgin feature-01
 
 ![MR Trigger Pipeline](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/mrTriggerJenkins.JPG)
 
-- Jenkins pipeline được Trigger và chạy trên nhánh **feature-01**
-- 
+- Jenkins pipeline được Trigger và chạy trên nhánh **MR-***
+
 ![MR Trigger Pipeline Jenkins](https://github.com/hoabka/jenkins-course/blob/master/jenkins-multibranch/images/pipelineMRTrigger.JPG)
 
 ## 3. Troubleshooting
