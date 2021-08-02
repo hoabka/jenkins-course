@@ -1,0 +1,39 @@
+pipeline {
+    agent {
+        docker { image 'gradle:jdk8-alpine' }
+    }
+    parameters {
+        string(
+            name: 'sonar_server',
+            defaultValue: 'http://localhost:9000',
+            description: 'SonarQube server'
+        )
+    }
+    stages {
+        stage('SCM') {
+            steps {
+                git url: 'https://github.com/spring-guides/gs-gradle.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'cd complete && /opt/gradle/bin/gradle build'
+            }
+        }
+        stage('sonar-scanner') {
+             def sonarqubeScannerHome = tool name: 'sonar_scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+             withCredentials([string(credentialsId: 'sonar', variable: 'sonarLogin')]) {
+                sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=${sonar_server} -Dsonar.login=${sonarLogin} -Dsonar.projectName=gs-gradle -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=GS -Dsonar.sources=complete/src/main/ -Dsonar.tests=complete/src/test/ -Dsonar.language=java -Dsonar.java.binaries=."
+             }
+        }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+    }
+}
