@@ -32,7 +32,7 @@ pipeline {
                 script {
                     def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     withSonarQubeEnv('sonar') {
-                        sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=publish -Dsonar.projectName=gs-gradle -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=GS -Dsonar.sources=app/complete/src/main/ -Dsonar.tests=app/complete/src/test/ -Dsonar.branch.name=dev -Dsonar.language=java -Dsonar.java.binaries=."
+                        sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=publish -Dsonar.projectName=gs-gradle -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=GS -Dsonar.sources=app/complete/src/main/ -Dsonar.tests=app/complete/src/test/ -Dsonar.language=java -Dsonar.java.binaries=."
                     }
                 }
             }
