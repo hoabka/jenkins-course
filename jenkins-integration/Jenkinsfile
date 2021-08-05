@@ -17,14 +17,16 @@ pipeline {
             steps {
                 script {
                     dir('app') {
-                        git(url: "https://github.com/hoabka/gs-gradle.git", branch: "main")
+                        git(url: "https://github.com/SonarSource/sonar-scanning-examples.git", branch: "master")
                     }
                 }
             }
         }
-        stage('build') {
+        stage('build and scanner') {
             steps {
-                sh 'cd app/complete && /opt/gradle/bin/gradle build'
+                withSonarQubeEnv('sonar') {
+                    sh 'cd app/sonarqube-scanner-gradle/gradle-basic && ./gradlew -Dsonar.host.url=${sonar_server} sonarqube'
+                }
             }
         }
         stage('sonar-scanner') {
@@ -32,7 +34,7 @@ pipeline {
                 script {
                     def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     withSonarQubeEnv('sonar') {
-                        sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=publish -Dsonar.projectName=gs-gradle -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=gs-gradle -Dsonar.sources=app/complete/src/main/ -Dsonar.tests=app/complete/src/test/ -Dsonar.language=java -Dsonar.java.binaries=. sonar"
+                        sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=publish -Dsonar.projectName=gs-gradle -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=gs-gradle -Dsonar.sources=app/complete/src/main/ -Dsonar.tests=app/complete/src/test/ -Dsonar.language=java -Dsonar.java.binaries=."
                     }
                 }
             }
