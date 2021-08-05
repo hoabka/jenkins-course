@@ -20,7 +20,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh 'cd complete && /opt/gradle/bin/gradle build'
+                sh 'cd gs-gradle/complete && /opt/gradle/bin/gradle build'
             }
         }
         stage('sonar-scanner') {
