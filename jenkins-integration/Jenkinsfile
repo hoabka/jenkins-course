@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'gradle:jdk8-alpine'
-            args '"-v ${env.JENKINS_HOME}/.gradle:/home/gradle/.gradle"'
+            args '"-v ${JENKINS_HOME}/.gradle:/home/gradle/.gradle"'
         }
     }
     parameters {
