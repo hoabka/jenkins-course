@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     dir('app') {
-                        git(url: "https://github.com/hoabka/gs-gradle.git", branch: "master")
+                        git(url: "https://github.com/hoabka/gs-gradle.git", branch: "main")
                     }
                 }
             }
