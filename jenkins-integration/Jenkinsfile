@@ -8,7 +8,7 @@ pipeline {
     parameters {
         string(
             name: 'sonar_server',
-            defaultValue: 'http://localhost:9000',
+            defaultValue: 'http://10.1.0.175:9000',
             description: 'SonarQube server'
         )
     }
