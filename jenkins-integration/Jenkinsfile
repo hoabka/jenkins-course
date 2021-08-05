@@ -15,7 +15,9 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                git url: 'https://github.com/spring-guides/gs-gradle.git'
+                script {
+                    git url: 'https://github.com/spring-guides/gs-gradle.git'
+                }
             }
         }
         stage('build') {
