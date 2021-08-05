@@ -16,13 +16,15 @@ pipeline {
         stage('SCM') {
             steps {
                 script {
-                    git url: 'https://github.com/spring-guides/gs-gradle.git'
+                    dir('app') {
+                        git(url: "https://github.com/spring-guides/gs-gradle.git")
+                    }
                 }
             }
         }
         stage('build') {
             steps {
-                sh 'cd gs-gradle/complete && /opt/gradle/bin/gradle build'
+                sh 'cd app/complete && /opt/gradle/bin/gradle build'
             }
         }
         stage('sonar-scanner') {
