@@ -93,10 +93,10 @@ $ docker ps | egrep "sonar|postgres"
 ### 2.3. Kiểm tra kết quả quét Code trên SonarQube
 - Kết quả quét Code trên SonarQube
 
-![SonarQube result](https://github.com/hoabka/jenkins-course/blob/master/jenkins-pipeline/images/sonarResult.JPG)
+![SonarQube result](https://github.com/hoabka/jenkins-course/blob/master/jenkins-integration/images/sonarResult.JPG)
 
 - Ở đây **Quality Gate** là nơi kiểm soát số lội quét được của SonarQube và quyết định có cho phép quyết định việc quét code **Pass** hay là **Failed** => Webhook sẽ gửi kết quả này về Jenkins Pipeline và Job Build sẽ **Success hoặc Failed** tương ứng với kết quả của **Quality Gate**
 
-![SonarQube pass result](https://github.com/hoabka/jenkins-course/blob/master/jenkins-pipeline/images/passResult.JPG)
+![SonarQube pass result](https://github.com/hoabka/jenkins-course/blob/master/jenkins-integration/images/passResult.JPG)
 
 ## 3. Troubleshooting
