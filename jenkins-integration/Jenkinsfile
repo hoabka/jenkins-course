@@ -29,16 +29,6 @@ pipeline {
                 }
             }
         }
-        stage('sonar-scanner') {
-            steps {
-                script {
-                    def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    withSonarQubeEnv('sonar') {
-                        sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=publish -Dsonar.projectName=gs-gradle -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=gs-gradle -Dsonar.sources=app/complete/src/main/ -Dsonar.tests=app/complete/src/test/ -Dsonar.language=java -Dsonar.java.binaries=."
-                    }
-                }
-            }
-        }
         stage("Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
