@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'gradle:jdk8-alpine'
-//            args '"-v ${JENKINS_HOME}/gradle:/home/gradle/.gradle"'
         }
     }
     parameters {
@@ -15,10 +14,8 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                script {
-                    dir('app') {
-                        git(url: "https://github.com/SonarSource/sonar-scanning-examples.git", branch: "master")
-                    }
+                dir('app') {
+                    git url: 'https://github.com/SonarSource/sonar-scanning-examples.git'
                 }
             }
         }
