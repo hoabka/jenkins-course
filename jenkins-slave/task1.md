@@ -29,6 +29,7 @@ $ docker ps
 # Kiểm tra kết nối ssh tới Jenkins Slave container
 $ ssh -i id_rsa jenkins@localhost -p2222
 
+# Thoát khỏi Jenkins Slave Ctrl + D
 # Trong trường hợp connection bị denied thì xóa file known_hosts đi
 $ rm ~/.ssh/known_hosts
 
