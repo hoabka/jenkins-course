@@ -33,8 +33,8 @@ $ ssh -i id_rsa jenkins@localhost -p2222
 # Trong trường hợp connection bị denied thì xóa file known_hosts đi
 $ rm ~/.ssh/known_hosts
 
-# Lấy IP của Jenkins Slave Node
-$ ifconfig | grep eth0
+# Lấy IP của Node mà Jenkins Slave đang chạy trên đó
+$ ifconfig
 
 # Add Jenkins Slave là trusted servers trên Jenkins Master
 $ ssh-keyscan -p2222 jenkins_slave_node_ip > /var/jenkins_home/.ssh/known_hosts
