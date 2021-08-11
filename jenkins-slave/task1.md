@@ -36,6 +36,9 @@ $ rm ~/.ssh/known_hosts
 # Lấy IP của Node mà Jenkins Slave đang chạy trên đó
 $ ifconfig
 
+# Tạo thư mục .ssh trên
+$ mkdir -p /var/jenkins_home/.ssh
+
 # Add Jenkins Slave là trusted servers trên Jenkins Master
 $ ssh-keyscan -p2222 jenkins_slave_node_ip > /var/jenkins_home/.ssh/known_hosts
 
