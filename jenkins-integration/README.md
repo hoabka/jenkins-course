@@ -18,8 +18,6 @@ $ echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 $ sudo sysctl -w vm.max_map_count=262144 
 
 # Cài đặt SonarQube
-# Switch sang user root
-$ sudo su
 $ docker-compose up -d
 
 # Kiểm tra SonarQube đã chạy hay chưa
@@ -43,7 +41,12 @@ $ docker ps | egrep "sonar|postgres"
 ![Add Credential](https://github.com/hoabka/jenkins-course/blob/master/jenkins-integration/images/addCredentialSonar.JPG)
 
 #### 1.2.3. Cài đặt SonarQube scanner plugin trên Jenkins
-- Chọn mục **Manage Jenkins** => **Manage Plugins** => Chọn Tab **Available** => Tìm Plugin **Sonarqube Scanner** => Sau đó nhấn cài đặt (**Install Without Restart**)
+- Chọn mục **Manage Jenkins** => **Manage Plugins** => Chọn Tab **Available** => Tìm Plugin **Sonarqube Scanner** 
+- => Sau đó nhấn cài đặt (**Install Without Restart**)
+- Tương tự cài đặt **docker**, **docker pipeline** plugin
+
+> **Sonarqube Scanner** plugin cho phép quản lý các Agent dùng để quét code của SonarQube.
+> **Docker** và **Docker Pipeline** plugin để cho phép tạo một Jenkins Slave Container theo một Image định nghĩa sẵn và cho phép Job Build của Jenkins chạy trên Slave này
 
 ![Install Plugin](https://github.com/hoabka/jenkins-course/blob/master/jenkins-integration/images/pluginSonarQube.JPG)
 
@@ -53,8 +56,11 @@ $ docker ps | egrep "sonar|postgres"
 ![Install SonarScanner](https://github.com/hoabka/jenkins-course/blob/master/jenkins-integration/images/installSonarQube.JPG)
 
 #### 1.2.4. Cấu hình SonarQube server trên Jenkins
-- Vào **Manage Jenkins**  => **Configure System** => **SonarQube servers** => **Add SonarQube** => Phần `Name` để là **sonar** (sẽ được dùng trong Jenkinsfile) và phần `Server URL` dể đường dẫn tới SonarQube server.
+- Vào **Manage Jenkins**  => **Configure System** => **SonarQube servers** => **Add SonarQube** => Phần `Name` để là **sonar** (sẽ được dùng trong Jenkinsfile) và phần `Server URL` để đường dẫn tới SonarQube server.
+- Tích chọn vào ô **Environment variables**
 - Phần Token chọn Token được tạo ra ở bước **1.2.2** rồi click **Save**
+
+> Việc tích chọn vào **Environment variables** sẽ cho phép lấy được các tham số cấu hình của SonarQube trong quá trình chạy Job.
 
 ![Add SonarQube server](https://github.com/hoabka/jenkins-course/blob/master/jenkins-integration/images/addSonarQubeServer.JPG)
 
