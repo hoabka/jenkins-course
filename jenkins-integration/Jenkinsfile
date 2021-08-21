@@ -15,9 +15,9 @@ pipeline {
         }
         stage('build and scanner') {
             steps {
-                withSonarQubeEnv('sonar') {
-                    sh 'cd app/sonarqube-scanner-gradle/gradle-basic && ./gradlew -Dsonar.host.url=${sonar} sonarqube'
-                }
+                withSonarQubeEnv('sonar', envOnly: true) {
+                    sh 'cd app/sonarqube-scanner-gradle/gradle-basic && ./gradlew -Dsonar.host.url=${env.SONAR_HOST_URL} sonarqube'
+                
             }
         }
         stage("Quality Gate") {
