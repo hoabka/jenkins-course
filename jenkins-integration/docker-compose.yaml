@@ -1,4 +1,4 @@
-fockversion: '2'
+version: '2'
 services:
   postgres:
     image: postgres:9.6
