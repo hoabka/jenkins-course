@@ -40,7 +40,7 @@ $ docker ps | egrep "sonar|postgres"
 
 ![Add Credential](https://github.com/hoabka/jenkins-course/blob/master/jenkins-integration/images/addCredentialSonar.JPG)
 
-#### 1.2.3. Cài đặt SonarQube scanner plugin trên Jenkins
+#### 1.2.3. Cài đặt SonarQube scanner, docker, docker pipeline plugin trên Jenkins
 - Chọn mục **Manage Jenkins** => **Manage Plugins** => Chọn Tab **Available** => Tìm Plugin **Sonarqube Scanner** 
 - => Sau đó nhấn cài đặt (**Install Without Restart**)
 - Tương tự cài đặt **docker**, **docker pipeline** plugin
