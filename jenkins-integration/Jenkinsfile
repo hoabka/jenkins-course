@@ -16,7 +16,7 @@ pipeline {
         stage('build and scanner') {
             steps {
                 withSonarQubeEnv(installationName: 'sonar', credentialsId: 'sonar', envOnly: true) {
-                    sh 'cd app/sonarqube-scanner-gradle/gradle-basic && ./gradlew -Dsonar.host.url=${env.SONAR_HOST_URL} sonarqube'
+                    sh 'cd app/sonarqube-scanner-gradle/gradle-basic && ./gradlew -Dsonar.host.url=${SONAR_HOST_URL} sonarqube'
                 }
             }
         }
