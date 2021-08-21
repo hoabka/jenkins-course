@@ -18,7 +18,7 @@ $ echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 $ sudo sysctl -w vm.max_map_count=262144 
 
 # Cài đặt SonarQube
-$ docker-compose up -d
+$ sudo docker-compose up -d
 
 # Kiểm tra SonarQube đã chạy hay chưa
 $ docker ps | egrep "sonar|postgres" 
