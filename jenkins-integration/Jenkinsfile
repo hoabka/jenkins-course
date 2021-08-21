@@ -17,7 +17,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar', envOnly: true) {
                     sh 'cd app/sonarqube-scanner-gradle/gradle-basic && ./gradlew -Dsonar.host.url=${env.SONAR_HOST_URL} sonarqube'
-                
+                }
             }
         }
         stage("Quality Gate") {
