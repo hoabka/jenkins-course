@@ -4,13 +4,6 @@ pipeline {
             image 'gradle:jdk8-alpine'
         }
     }
-    parameters {
-        string(
-            name: 'sonar_server',
-            defaultValue: 'http://10.1.0.175:9000',
-            description: 'SonarQube server'
-        )
-    }
     stages {
         stage('SCM') {
             steps {
@@ -23,7 +16,7 @@ pipeline {
         stage('build and scanner') {
             steps {
                 withSonarQubeEnv('sonar') {
-                    sh 'cd app/sonarqube-scanner-gradle/gradle-basic && ./gradlew -Dsonar.host.url=${sonar_server} sonarqube'
+                    sh 'cd app/sonarqube-scanner-gradle/gradle-basic && ./gradlew -Dsonar.host.url=${sonar} sonarqube'
                 }
             }
         }
