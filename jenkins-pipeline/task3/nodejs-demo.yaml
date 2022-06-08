@@ -1,1 +1,3 @@
-
+REGISTRY_NAME="hoabka"
+env:
+  image: nodejs-demo
