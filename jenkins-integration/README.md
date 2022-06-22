@@ -5,7 +5,9 @@ Trong task này, bạn được yêu cầu cài đặt công cụ quét code tĩ
 ## Prequisites  
 | Yêu cầu |  Version|  
 |--|--|  
-| docker-compose ([guideline](https://docs.docker.com/compose/install/#alternative-install-options)) | 1.21.2+ |  
+| docker-compose ([guideline](https://docs.docker.com/compose/install/#alternative-install-options)) | 1.21.2+ | 
+
+| docker plugin ([guideline](https://plugins.jenkins.io/docker-workflow/)) |latest | 
 
 ## 1. Cài đặt SonarQube
 ### 1.1.  Cài đặt SonarQube
