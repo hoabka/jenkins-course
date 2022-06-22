@@ -65,6 +65,7 @@ $ docker ps | egrep "sonar|postgres"
 ![Add SonarQube server](https://github.com/hoabka/jenkins-course/blob/master/jenkins-integration/images/addSonarQubeServer.JPG)
 
 #### 1.2.5. Tạo Webhook trên SonarQube
+- Login SonarQube với user mặc định là admin/admin
 - Webhook mục đích cho phép SonarQube có thể gửi kết quả phân tích ngược về Jenkins sau khi hoàn thành quá trình quét code
 - Trên **SonarQube server** vào **Administration** sau đó chon **Configuration** => **Webhooks** 
 
