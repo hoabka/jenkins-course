@@ -1,0 +1,81 @@
+pipeline {
+    agent any
+    tools {nodejs "nodejs"}
+
+    environment {
+        REGISTRY_NAME               = credentials('REGISTRY_NAME')
+        DOCKER_REGISTRY_USERNAME    = credentials('DOCKER_REGISTRY_USERNAME')
+        DOCKER_REGISTRY_PASSWORD    = credentials('DOCKER_REGISTRY_PASSWORD')
+        REMOTE_HOST                 = "127.0.0.1"
+        REMOTE_USER                 = "ubuntu"
+    }
+    stages {
+        stage('build') {
+            steps {
+                echo 'Build'
+                        sh 'npm install'
+            }
+        }
+        stage('test') {
+            steps {
+                echo 'Test'
+            }
+        }
+        stage('For feature-* branch') {
+            when {
+                branch 'feature-*'
+            }
+            steps {
+                echo "Feature branch"
+            }
+        }
+        stage('For MR-* branch') {
+            when {
+                branch 'MR-*'
+            }
+            steps {
+                echo "MR branch"
+            }
+        }
+        stage('Deploy Dev') {
+            when {
+                branch 'dev'
+            }
+            steps {
+                sh '''#!/usr/bin/env bash
+                docker login -u ${DOCKER_REGISTRY_USERNAME} -p ${DOCKER_REGISTRY_PASSWORD}
+                docker build --tag "${REGISTRY_NAME}/nodejs-demo-mb:${BRANCH_NAME}-${BUILD_NUMBER}" .
+                docker push "${REGISTRY_NAME}/nodejs-demo-mb:${BRANCH_NAME}-${BUILD_NUMBER}
+                '''
+            }
+            sshagent (credentials: ['ssh-key']) {
+                // get the last commit id from a repository you own
+                sh 'ssh -o StrictHostKeyChecking=no  ${REMOTE_USER}:${REMOTE_HOST} "docker run --rm ${REGISTRY_NAME}/nodejs-demo-mb:${BRANCH_NAME}-${BUILD_NUMBER} -p 8080:8080"'
+            }
+        }
+        stage('Deploy Staging') {
+            when {
+                branch 'staging'
+            }
+            steps {
+                sh '''#!/usr/bin/env bash
+                docker login -u ${DOCKER_REGISTRY_USERNAME} -p ${DOCKER_REGISTRY_PASSWORD}
+                docker build --tag "${REGISTRY_NAME}/nodejs-demo-mb:${BRANCH_NAME}-${BUILD_NUMBER}" .
+                docker push "${REGISTRY_NAME}/nodejs-demo-mb:${BRANCH_NAME}-${BUILD_NUMBER}
+                '''
+            }
+            sshagent (credentials: ['ssh-key']) {
+                // get the last commit id from a repository you own
+                sh 'ssh -o StrictHostKeyChecking=no  ${REMOTE_USER}:${REMOTE_HOST} "docker run --rm ${REGISTRY_NAME}/nodejs-demo-mb:${BRANCH_NAME}-${BUILD_NUMBER} -p 8080:8080"'
+            }
+        }
+        post {
+            success {
+                slackSend "Build deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+            failure {
+                slackSend failOnError:true message:"Build failed  - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+        }
+    }
+}
